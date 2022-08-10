@@ -24,7 +24,7 @@
   ansible.builtin.shell: curl -s http://44.192.110.235:8081/repository/integration-local/com/javacodegeeks/SampleWebApplication/1.0-SNAPSHOT/SampleWebApplication-1.0-20220717.133631-2.war
   register: out
   args:
-    chdir: "{{ APP_LOCATION }}"
+    chdir: "{{ APP_LOCATION }}/webapps"
 
 - name: Run Tomcat
   shell: ./startup.sh
