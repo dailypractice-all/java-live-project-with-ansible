@@ -1,0 +1,5 @@
+- name: Run Roboshop Setup
+  hosts: "SAMPLEAPP"
+  become: yes
+  roles:
+    - "sampleapp"
