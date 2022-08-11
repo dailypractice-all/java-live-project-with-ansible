@@ -16,7 +16,7 @@
 
 - name: Download & Extract Tomcat Component Archive
   ansible.builtin.unarchive:
-    src: curl -s https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.23/bin/apache-tomcat-10.0.23.tar.gz
+    src: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.23/bin/apache-tomcat-10.0.23.tar.gz
     dest: "{{ APP_LOCATION }}"
     remote_src: yes
 
