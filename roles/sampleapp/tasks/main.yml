@@ -13,17 +13,20 @@
     path: "{{ APP_LOCATION }}"
     state: directory
 
-- name: Download Tomcat package
-  ansible.builtin.shell: curl -o https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.23/bin/apache-tomcat-10.0.23.tar.gz
+- name: Download Tomcat Server
+  ansible.builtin.get_url:
+    url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.23/bin/apache-tomcat-10.0.23.tar.gz
+    dest: "{{ APP_LOCATION }}"
+    mode: '0755'
 
 - name: untar Tomcat package
   ansible.builtin.shell: tar -xvf apache-tomcat-10.0.23.tar.gz
 
-- name: Get Latest Version of Appication from Nexus
-  ansible.builtin.shell: curl -o http://3.228.9.176:8081/repository/integration-local/com/javacodegeeks/SampleWebApplication/1.0-SNAPSHOT/SampleWebApplication-1.0-20220717.133631-2.war
-  register: out
-  args:
-    chdir: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/webapps"
+- name: Download Tomcat Server
+  ansible.builtin.get_url:
+    url: http://3.228.9.176:8081/repository/integration-local/com/javacodegeeks/SampleWebApplication/1.0-SNAPSHOT/SampleWebApplication-1.0-20220717.133631-2.war
+    dest: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/webapps"
+    mode: '0755'
 
 - name: Run Tomcat
   shell: ./startup.sh
