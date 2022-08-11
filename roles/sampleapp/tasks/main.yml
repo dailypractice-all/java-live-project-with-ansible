@@ -31,16 +31,14 @@
   args:
     chdir: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/webapps"
 
-
-- name: Download Java JRE
-  get_url:
-    url: http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.rpm
-    dest: /opt/jre-8u60-linux-x64.rpm
-    headers: 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie'
+- name: Download Tomcat package
+  ansible.builtin.shell: wget http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.rpm" --no-check-certificate"
+  args:
+    chdir: "{{ APP_LOCATION }}"
 
 - name: install Java JRE rpm from a local file
   yum:
-    name: /opt/jre-8u60-linux-x64.rpm
+    name: "{{ APP_LOCATION }}/jre-8u60-linux-x64.rpm"
     state: installed
 
 - name: Run Tomcat
