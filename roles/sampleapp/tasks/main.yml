@@ -31,15 +31,10 @@
   args:
     chdir: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/webapps"
 
-- name: Download java jre package
-  ansible.builtin.shell: "wget http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.rpm --no-check-certificate"
-  args:
-    chdir: "{{ APP_LOCATION }}"
-
-- name: install Java JRE rpm from a local file
-  yum:
-    name: "{{ APP_LOCATION }}/jre-8u60-linux-x64.rpm"
-    state: present
+- name: Install java jre
+  ansible.builtin.yum:
+    name: java-11-openjdk-devel
+    state: installed
 
 - name: Run Tomcat
   shell: ./startup.sh
