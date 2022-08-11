@@ -14,7 +14,7 @@
     state: directory
 
 - name: Download Tomcat package
-  ansible.builtin.shell: wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.23/bin/apache-tomcat-10.0.23.tar.gz "--no-check-certificate"
+  ansible.builtin.shell: "wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.23/bin/apache-tomcat-10.0.23.tar.gz --no-check-certificate"
   register: out
   args:
       chdir: "{{ APP_LOCATION }}"
@@ -26,13 +26,13 @@
       chdir: "{{ APP_LOCATION }}"
 
 - name: Get Latest Version of Appication from Nexus
-  ansible.builtin.shell: wget http://3.228.9.176:8081/repository/integration-local/com/javacodegeeks/SampleWebApplication/1.0-SNAPSHOT/SampleWebApplication-1.0-20220717.133631-2.war "--no-check-certificate"
+  ansible.builtin.shell: "wget http://3.228.9.176:8081/repository/integration-local/com/javacodegeeks/SampleWebApplication/1.0-SNAPSHOT/SampleWebApplication-1.0-20220717.133631-2.war --no-check-certificate"
   register: out
   args:
     chdir: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/webapps"
 
-- name: Download Tomcat package
-  ansible.builtin.shell: wget http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.rpm" --no-check-certificate"
+- name: Download java jre package
+  ansible.builtin.shell: "wget http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.rpm --no-check-certificate"
   args:
     chdir: "{{ APP_LOCATION }}"
 
