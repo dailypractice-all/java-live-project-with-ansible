@@ -41,7 +41,7 @@
 - name: install Java JRE rpm from a local file
   yum:
     name: /opt/jre-8u60-linux-x64.rpm
-  state: present
+    state: installed
 
 - name: Run Tomcat
   shell: ./startup.sh
