@@ -45,7 +45,7 @@
     state: installed
 
 - name: Run Tomcat
-  shell: ".{{ APP_LOCATION }}/apache-tomcat-10.0.23/bin/startup.sh"
+  shell: "./startup.sh"
 
 
 
