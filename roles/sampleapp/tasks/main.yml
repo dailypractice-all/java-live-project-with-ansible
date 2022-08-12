@@ -27,7 +27,7 @@
 
 - name: Recursively change ownership of a Apache Tomcat directory
   ansible.builtin.file:
-    path: "{{ APP_LOCATION }}/apache-tomcat-10.0.23"
+    path: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/bin"
     state: directory
     recurse: yes
     owner: centos
