@@ -26,7 +26,7 @@
       chdir: "{{ APP_LOCATION }}"
 
 - name: Get Latest Version of Appication from Nexus
-  ansible.builtin.shell: "wget http://3.228.9.176:8081/repository/integration-local/com/javacodegeeks/SampleWebApplication/1.0-SNAPSHOT/SampleWebApplication-1.0-20220717.133631-2.war --no-check-certificate"
+  ansible.builtin.shell: "wget http://nexus.dailypractice.internal:8081/repository/integration-local/com/javacodegeeks/SampleWebApplication/1.0-SNAPSHOT/SampleWebApplication-1.0-20220717.133631-2.war --no-check-certificate"
   register: out
   args:
     chdir: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/webapps"
