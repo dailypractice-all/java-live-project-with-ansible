@@ -55,10 +55,10 @@
   args:
     chdir: /usr/share/tomcat/webapps
 
-- name: Restart Nginx Service
+- name: Restart Tomcat Service
   ansible.builtin.systemd:
     name: tomcat
-    state: restarted
+    state: start
     enabled: yes
 
 
