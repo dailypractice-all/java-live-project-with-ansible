@@ -1,8 +1,3 @@
-- name: Create user tomcat
-  ansible.builtin.user:
-    name: tomcat
-  register: app_user
-
 - name: Remove app location
   ansible.builtin.file:
     path: "{{ APP_LOCATION }}"
@@ -25,20 +20,20 @@
   args:
       chdir: "{{ APP_LOCATION }}"
 
-- name: Recursively change ownership of a Apache Tomcat directory
-  ansible.builtin.file:
-    path: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/bin"
-    state: directory
-    recurse: yes
-    owner: tomcat
-    group: tomcat
+#- name: Recursively change ownership of a Apache Tomcat directory
+#  ansible.builtin.file:
+#    path: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/bin"
+#    state: directory
+#    recurse: yes
+#    owner: tom
+#    group: tomcat
 
-- name: Change file ownership, for startup file
-  ansible.builtin.file:
-    path: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/bin/startup.sh"
-    owner: tomcat
-    group: tomcat
-    mode: '0755'
+#- name: Change file ownership, for startup file
+#  ansible.builtin.file:
+#    path: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/bin/startup.sh"
+#    owner: centos
+#    group: tomcat
+#    mode: '0755'
 
 - name: Get Latest Version of Appication from Nexus
   ansible.builtin.shell: "wget http://nexus.dailypractice.internal:8081/repository/integration-local/com/javacodegeeks/SampleWebApplication/1.0-SNAPSHOT/SampleWebApplication-1.0-20220717.133631-2.war --no-check-certificate"
