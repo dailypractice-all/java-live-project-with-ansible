@@ -1,4 +1,5 @@
 - name: Run tomcat Setup
   hosts: "SAMPLEAPP"
+  become: yes
   roles:
     - "sampleapp"
