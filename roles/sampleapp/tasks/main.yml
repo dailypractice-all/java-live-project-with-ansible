@@ -1,24 +1,24 @@
-- name: Remove app location
-  ansible.builtin.file:
-    path: "{{ APP_LOCATION }}"
-    state: absent
+#- name: Remove app location
+#  ansible.builtin.file:
+#    path: "{{ APP_LOCATION }}"
+#    state: absent
+#
+#- name: create app location
+#  ansible.builtin.file:
+#    path: "{{ APP_LOCATION }}"
+#    state: directory
 
-- name: create app location
-  ansible.builtin.file:
-    path: "{{ APP_LOCATION }}"
-    state: directory
-
-- name: Download Tomcat package
-  ansible.builtin.shell: "wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.23/bin/apache-tomcat-10.0.23.tar.gz --no-check-certificate"
-  register: out
-  args:
-      chdir: "{{ APP_LOCATION }}"
-
-- name: untar Tomcat package
-  ansible.builtin.shell: tar -xvf apache-tomcat-10.0.23.tar.gz
-  register: out
-  args:
-      chdir: "{{ APP_LOCATION }}"
+#- name: Download Tomcat package
+#  ansible.builtin.shell: "wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.23/bin/apache-tomcat-10.0.23.tar.gz --no-check-certificate"
+#  register: out
+#  args:
+#      chdir: "{{ APP_LOCATION }}"
+#
+#- name: untar Tomcat package
+#  ansible.builtin.shell: tar -xvf apache-tomcat-10.0.23.tar.gz
+#  register: out
+#  args:
+#      chdir: "{{ APP_LOCATION }}"
 
 #- name: Recursively change ownership of a Apache Tomcat directory
 #  ansible.builtin.file:
@@ -35,20 +35,31 @@
 #    group: centos
 #    mode: '0777'
 
-- name: Get Latest Version of Appication from Nexus
-  ansible.builtin.shell: "wget http://nexus.dailypractice.internal:8081/repository/integration-local/com/javacodegeeks/SampleWebApplication/1.0-SNAPSHOT/SampleWebApplication-1.0-20220717.133631-2.war --no-check-certificate"
-  register: out
-  args:
-    chdir: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/webapps"
-
 - name: Install java jre
   ansible.builtin.yum:
     name: java-11-openjdk-devel
     state: installed
   become: yes
 
-- name: Run Tomcat
-  shell: "{{ APP_LOCATION }}/apache-tomcat-10.0.23/bin/startup.sh &"
+
+- name: Install tomcat
+  ansible.builtin.yum:
+    name: tomcat
+    state: installed
+  become: yes
+
+
+- name: Get Latest Version of Appication from Nexus
+  ansible.builtin.shell: "wget http://nexus.dailypractice.internal:8081/repository/integration-local/com/javacodegeeks/SampleWebApplication/1.0-SNAPSHOT/SampleWebApplication-1.0-20220717.133631-2.war --no-check-certificate"
+  register: out
+  args:
+    chdir: /usr/share/tomcat/webapps
+
+- name: Restart Nginx Service
+  ansible.builtin.systemd:
+    name: tomcat
+    state: restarted
+    enabled: yes
 
 
 
