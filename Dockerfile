@@ -4,7 +4,7 @@ LABEL MAINTAINER="1996gauravb@gmail.com"
 LABEL APPLICATION="Sample Application"
 
 WORKDIR /usr/src/app
-RUN curl -O -L http://18.207.101.51:8081/repository/integration-local/com/javacodegeeks/SampleWebApplication/1.0-SNAPSHOT/SampleWebApplication-1.0-20220717.133631-2.war
+#RUN curl -O -L http://18.207.101.51:8081/repository/integration-local/com/javacodegeeks/SampleWebApplication/1.0-SNAPSHOT/SampleWebApplication-1.0-20220717.133631-2.war
 #COPY . /usr/src/app
 #RUN mvn package
 
